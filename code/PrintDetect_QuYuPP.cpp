@@ -7,7 +7,7 @@ void cut_ocrimage(Mat Color){
 
 	for (int i = 0; i < Gray.rows; i++){
 		for (int j = 0; j < Gray.cols; j++){
-			// ¶ÔÍ¼ÏñÈ¡·´
+			// å¯¹å›¾åƒå–å
 			Gray.at<uchar>(i, j) = 255 - Gray.at<uchar>(i, j);
 		}
 	}
@@ -18,12 +18,12 @@ void cut_ocrimage(Mat Color){
 		{
 			if (Gray.at<uchar>(i, j) == 255)
 			{
-				h[i] ++;  // Í³¼ÆÃ¿Ò»ĞĞµÄ¸ßÁÁÏñËØÊı
+				h[i] ++;  // ç»Ÿè®¡æ¯ä¸€è¡Œçš„é«˜äº®åƒç´ æ•°
 			}
 		}
 	}
 
-	// µÃµ½´¹Ö±·½ÏòÉÏµÄÍ¶Ó°
+	// å¾—åˆ°å‚ç›´æ–¹å‘ä¸Šçš„æŠ•å½±
 	for (int i = 0; i < Gray.rows; i++)
 	{
 		for (int j = 0; j < h[i]; j++)
@@ -72,20 +72,20 @@ void cut_ocrimage(Mat Color){
 	}
 	int Hstart = 0, mm = 0;
 	char *name = "E:\\picture\\words\\";
-	// ÔÚÕâÀïvÊÇÎÒÃÇ´æ·Åµ½verticalÖĞµÄ·Ö¸îÏßÊıÄ¿
+	// åœ¨è¿™é‡Œvæ˜¯æˆ‘ä»¬å­˜æ”¾åˆ°verticalä¸­çš„åˆ†å‰²çº¿æ•°ç›®
 	for (int m = 0; m < v; m++)
 	{
 		if (m % 2 == 1)
 		{
-			// vertical[i]±íÊ¾´æ·Å·Ö¸îÏßx×ø±êµÄÁĞ±í£¬ÆäÖĞµÚiÌõ·Ö¸îÏßµÄx×ø±ê
+			// vertical[i]è¡¨ç¤ºå­˜æ”¾åˆ†å‰²çº¿xåæ ‡çš„åˆ—è¡¨ï¼Œå…¶ä¸­ç¬¬iæ¡åˆ†å‰²çº¿çš„xåæ ‡
 			ROIimg = Gray(Rect(0, vertical[m - 1], Gray.cols, vertical[m] - vertical[m - 1]));
 			horizon_hist = Mat(vertical[m] - vertical[m - 1], Gray.cols, CV_8UC1, Scalar(0));
 
 
-			// ÏÖÔÚ¶ÔÃ¿Ò»ÕÅROIimg½øĞĞË®Æ½·½ÏòÉÏµÄÍ¶Ó°¼ÆËã
+			// ç°åœ¨å¯¹æ¯ä¸€å¼ ROIimgè¿›è¡Œæ°´å¹³æ–¹å‘ä¸Šçš„æŠ•å½±è®¡ç®—
 			for (int i = 0; i < ROIimg.cols; i++)
 			{
-				// ±ØĞëÔÚÀÛ¼ÓÃ¿Ò»ÁĞ¸ßÁÁÏñËØÊıÖ®Ç°£¬¶Ô¸ÃÁĞ½øĞĞÖÃÁã£¬·ñÔòÖØ¸´ÀÛ¼ÓÏÔÈ»»á³¬³öROIimgµÄÍ¼Ïñ¸ß¶È¡£
+				// å¿…é¡»åœ¨ç´¯åŠ æ¯ä¸€åˆ—é«˜äº®åƒç´ æ•°ä¹‹å‰ï¼Œå¯¹è¯¥åˆ—è¿›è¡Œç½®é›¶ï¼Œå¦åˆ™é‡å¤ç´¯åŠ æ˜¾ç„¶ä¼šè¶…å‡ºROIimgçš„å›¾åƒé«˜åº¦ã€‚
 				horizonH[i] = 0;
 				for (int j = 0; j < ROIimg.rows; j++)
 				{
@@ -94,7 +94,7 @@ void cut_ocrimage(Mat Color){
 						horizonH[i]++;
 					}
 				}
-			} //Ë®Æ½·½ÏòÉÏµÄÍ¶Ó°Ö±·½Í¼µÄ¼ÆËã
+			} //æ°´å¹³æ–¹å‘ä¸Šçš„æŠ•å½±ç›´æ–¹å›¾çš„è®¡ç®—
 			for (int i = 0; i < ROIimg.cols; i++)
 			{
 				for (int j = 0; j < horizonH[i]; j++)
@@ -130,7 +130,6 @@ void cut_ocrimage(Mat Color){
 				}
 			}
 		}
-
 	}
 	imshow("Color", Color);
 	waitKey(0);
